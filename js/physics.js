@@ -11,6 +11,10 @@ Physics = new (function() {
       return this;
     }
 
+    this.operate = function(f, u, v, w, x, y, z) {
+      f(this, u, v, w, x, y, z);
+    }
+
     this.fliph = function() {
       this.x = -this.x;
       return this;

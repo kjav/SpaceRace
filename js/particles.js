@@ -44,8 +44,9 @@ ParticleEmitter = function(rate, max, pos, vel, dvel, colour, emitting) {
 
 var particle_integrator = new (function() {
   this.update = function(pos, vel, acc, dt) {
-      pos.add(vel.copy().add(vel.copy().add(acc.copy().scale(dt))).scale(dt*0.5));
-      vel.add(acc.copy().scale(dt));
+      pos.operate(function(self, u, v) { self.x += (u.x + (u.x + (v.x * dt))) * (dt / 2);
+                                         self.y += (u.y + (u.y + (v.y * dt))) * (dt / 2); }, vel, acc);
+      vel.operate(function(self, u) { self.x += u.x * dt; self.y += u.y * dt; }, acc);
   }
 })();
 

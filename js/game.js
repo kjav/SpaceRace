@@ -19,7 +19,7 @@ function setup() {
 
   scene = new Bulb.World(c);
 
-  var pe = new ParticleEmitter(150, 50, new Physics.Vector2(20, 20), new Physics.Vector2(0, 100), new Physics.Vector2(25, 25), '#000000', false);
+  var pe = new ParticleEmitter(100, 50, new Physics.Vector2(20, 20), new Physics.Vector2(0, 100), new Physics.Vector2(25, 25), '#000000', false);
   scene.add(pe);
 
   var b = new Bulb.Quad({
