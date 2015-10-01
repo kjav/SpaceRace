@@ -33,7 +33,7 @@ function setup() {
     fuel: 0
   });
 
-  scene.add(a);
+//  scene.add(a);
 
   var b = new Bulb.Quad({
     pos: new Physics.Vector2(window.innerWidth / 2, window.innerHeight / 2),
