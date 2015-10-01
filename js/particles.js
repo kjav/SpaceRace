@@ -30,7 +30,7 @@ ParticleEmitter = function(rate, max, pos, vel, dvel, colour, emitting) {
     vel.x += this.dvel.x * (Math.random() * 2 - 1)
     vel.y += this.dvel.y * (Math.random() * 2 - 1)
     if (this.pool.length === this.max) {
-      this.pool[this.currentParticle++].set(this.pos.copy(), vel, this.colour);
+      this.pool[this.currentParticle++].set(this.pos, vel, this.colour);
       this.currentParticle %= this.max;
     } else {
       this.pool.push(new Particle(this.pos.copy(), vel, this.colour));
@@ -53,12 +53,20 @@ var particle_integrator = new (function() {
 
 Particle = function(pos, vel, colour) {
   this.set = function(pos, vel, colour) {
-    this.pos = pos;
-    this.vel = vel;
+    this.pos.operate(function(self, u) {
+      self.x = u.x;
+      self.y = u.y;
+    }, pos);
+    this.vel.operate(function(self, u) {
+      self.x = u.x;
+      self.y = u.y;
+    }, vel);
     this.acc = new Physics.Vector2(0, 0);
     this.colour = colour;
   }
 
+  this.pos = pos || new Physics.Vector2(0, 0);
+  this.vel = vel || new Physics.Vector2(0, 0);
   this.set(pos, vel, colour);
 
   this.step = function(dt) {
