@@ -146,12 +146,12 @@ Physics = new (function() {
       corners.push(corners[0]);
       for (var i=0;i<corners.length - 2; i++) {
         var m = (corners[i + 1].y - corners[i].y) / (corners[i+1].x - corners[i].x);
-        var c = ;
+//        var c = ;
         var line = {
           m: m,
           c: c
         };
-        collides &= side(line, p) === side(line, corners[(i+2)%corners.length);
+        collides &= side(line, p) === side(line, corners[(i+2)%corners.length]);
       }
       return true;
     }
