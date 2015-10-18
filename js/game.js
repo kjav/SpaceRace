@@ -156,12 +156,27 @@ function setup() {
   });
   scene.add(b);
 
+
+  var fps = 0;
+  var delta = 1000;
+  var dstart = time();
+  var dcounter = 0;
   var prev = time();
   function update() {
-    var p = (time() - prev) / 1000;
-    prev = time();
+    var T = time();
+    var p = (T - prev) / 1000;
+    prev = T;
     scene.step(p);
     c.clearRect(0, 0, canvas.width, canvas.height);
+
+    //fps things
+    if (dstart + delta < T) {
+      fps = dcounter / (delta * 0.001);
+      window.fps = fps;
+      dcounter = 0;
+      dstart = T;
+    }
+    dcounter++;
 
     scene.render();
 

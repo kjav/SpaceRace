@@ -77,6 +77,9 @@ Bulb = new (function() {
 
       drawDigit(24.5, 25.5, ((0 | vel * 100) % 10).toString(), ctx);
 
+      drawDigit(window.innerWidth - 0.5, window.innerHeight - 2.5, (window.fps / 10 | 0).toString(), ctx);
+      drawDigit(window.innerWidth - 11.5, window.innerHeight - 2.5, (window.fps % 10).toString(), ctx);
+
       ctx.stroke();
     };
 
